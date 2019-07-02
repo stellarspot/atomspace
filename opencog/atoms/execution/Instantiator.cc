@@ -116,9 +116,8 @@ Handle Instantiator::reduce_exout(const Handle& expr, bool silent)
 	Handle sn(eolp->get_schema());
 	Handle args(eolp->get_args());
 
-        if (VARIABLE_NODE == sn->get_type()) {
-            sn = beta_reduce(sn, *_vmap);
-        }
+	if (not _vmap->empty())
+		sn = beta_reduce(sn, *_vmap);
 
 	// If its a DSN, obtain the correct body for it.
 	if (DEFINED_SCHEMA_NODE == sn->get_type())
