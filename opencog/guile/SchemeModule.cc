@@ -76,6 +76,7 @@ ModuleWrap::ModuleWrap(const char* m) :
 
 void ModuleWrap::module_init(void)
 {
+	printf("XXX: %p\n", this);
 	scm_with_guile(init_in_guile, this);
 }
 
@@ -100,4 +101,5 @@ void ModuleWrap::init_in_module(void* data)
 
 ModuleWrap::~ModuleWrap()
 {
+	printf("XXX: ModuleWrap destructor called: %p\n", this);
 }
