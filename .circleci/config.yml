@@ -44,23 +44,23 @@ jobs:
           command: mkdir build && cd build && cmake ..
       - run:
           name: Build
-          command: cd build && make -j2
-      - run:
-          name: Build tests
-          command: cd build && make -j2 tests
-      - run:
-          name: Run tests
-          command: cd build && make -j2 test ARGS=-j2
+          command: cd build && make -j4
+#      - run:
+#          name: Build tests
+#          command: cd build && make -j2 tests
+#      - run:
+#          name: Run tests
+#          command: cd build && make -j2 test ARGS=-j2
       - run:
           name: Install AtomSpace
-          command: cd build && make -j2 install && ldconfig
+          command: cd build && make -j4 install && ldconfig
       - run:
           name: Build examples
-          command: cd build && make -j2 examples
-      - run:
-          name: Print test log
-          command: cat build/tests/Testing/Temporary/LastTest.log
-          when: always
+          command: cd build && make -j4 examples
+#      - run:
+#          name: Print test log
+#          command: cat build/tests/Testing/Temporary/LastTest.log
+#          when: always
       - save_cache:
           name: Save GHC Cache
           key: ghc-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{ arch }}
@@ -71,6 +71,9 @@ jobs:
           key: haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
           paths:
             - /ws/atomspace/opencog/haskell/.stack-work
+      - run:
+          name: Show WorkSpace
+          command: ls /ws
       - persist_to_workspace:
           root: /ws/
           paths:
@@ -114,16 +117,19 @@ jobs:
       - run:
           name: Install OpenCog
           command: cd build && make -j2 install && ldconfig
+#      - run:
+#          name: Build tests
+#          command: cd build && make -j2 tests
+#      - run:
+#          name: Run tests
+#          command: cd build && make -j2 test ARGS=-j2
+#      - run:
+#          name: Print test log
+#          command: cat build/tests/Testing/Temporary/LastTest.log
+#          when: always
       - run:
-          name: Build tests
-          command: cd build && make -j2 tests
-      - run:
-          name: Run tests
-          command: cd build && make -j2 test ARGS=-j2
-      - run:
-          name: Print test log
-          command: cat build/tests/Testing/Temporary/LastTest.log
-          when: always
+          name: Show WorkSpace
+          command: ls /ws
       - persist_to_workspace:
           root: /ws/
           paths:
