@@ -28,7 +28,7 @@ jobs:
           command: |
             git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/cogutil /ws/cogutil
             mkdir -p /ws/cogutil/build
-#            cd /ws/cogutil/build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache .. && make -j2 && make -j2 install
+            # cd /ws/cogutil/build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache .. && make -j2 && make -j2 install
             cd /ws/cogutil/build && cmake .. && make -j2 && make -j2 install
             ldconfig
       - checkout
