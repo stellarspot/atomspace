@@ -17,6 +17,9 @@ jobs:
       - attach_workspace:
           at: /ws
       - run:
+          name: Check c++
+          command: which c++
+      - run:
           name: Start restoring ccache
           command: date +%d-%m-%Y > /tmp/date
       - restore_cache:
@@ -29,7 +32,7 @@ jobs:
             git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/cogutil /ws/cogutil
             mkdir -p /ws/cogutil/build
             # cd /ws/cogutil/build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache .. && make -j2 && make -j2 install
-            cd /ws/cogutil/build && cmake .. && make -j2 && make -j2 install
+            cd /ws/cogutil/build && cmake .. && make -j2 && make -j2 install && cat CMakeCache.txt
             ldconfig
       - checkout
       - restore_cache:
