@@ -41,10 +41,10 @@ jobs:
             - haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
       - run:
           name: Show WorkSpace (Before)
-          command: ls /ws
+          command: ls /ws /ws/ccache
       - run:
           name: CMake Configure
-          command: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
+          command: mkdir build && cd build && cmake ..
       - run:
           name: Build
           command: cd build && make -j4
