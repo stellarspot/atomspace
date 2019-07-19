@@ -40,6 +40,9 @@ jobs:
           keys:
             - haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
       - run:
+          name: Show WorkSpace (Before)
+          command: ls /ws
+      - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
       - run:
@@ -99,6 +102,9 @@ jobs:
           name: Restore Haskell Deps Cache
           keys:
             - haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
+      - run:
+          name: Show WorkSpace (Before)
+          command: ls /ws
       - run:
           name: Install cogutil
           command: cd /ws/cogutil/build && make -j2 install && ldconfig
