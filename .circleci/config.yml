@@ -42,7 +42,7 @@ jobs:
             - haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
       - run:
           name: Show WorkSpace (Before)
-          command: ls /ws /ws/ccache
+          command: ls /ws
       - run:
           name: CMake Configure
           command: mkdir build && cd build && cmake ..
@@ -75,6 +75,10 @@ jobs:
           key: haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
           paths:
             - /ws/atomspace/opencog/haskell/.stack-work
+      - save_cache:
+          key: ccache-{{ checksum "/tmp/date" }}
+          paths:
+          - /ws/ccache
       - run:
           name: Show WorkSpace
           command: ls /ws

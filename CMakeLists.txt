@@ -53,14 +53,14 @@ ADD_DEFINITIONS(-DPROJECT_SOURCE_DIR="${CMAKE_SOURCE_DIR}"
                 -DPROJECT_BINARY_DIR="${CMAKE_BINARY_DIR}")
 
 
-# message("ccache dir: $ENV{CCACHE_DIR}")
+message("ccache dir: $ENV{CCACHE_DIR}")
 
-# find_program(CCACHE_FOUND ccache)
-# if(CCACHE_FOUND)
-# 	message("Use ccache.")
-# 	set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-# 	set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-# endif(CCACHE_FOUND)
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+	message("Use ccache.")
+	set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+	set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+endif(CCACHE_FOUND)
 
 # ===============================================================
 # Detect different compilers and OS'es, tweak flags as necessary.
