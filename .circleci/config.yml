@@ -45,7 +45,7 @@ jobs:
           command: ls /ws
       - run:
           name: CMake Configure
-          command: mkdir build && cd build && cmake ..
+          command: mkdir build && cd build && cmake .. && cat CMakeCache.txt
       - run:
           name: Build
           command: cd build && make -j4
