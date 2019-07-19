@@ -28,7 +28,7 @@ jobs:
           command: |
             git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/cogutil /ws/cogutil
             mkdir -p /ws/cogutil/build
-            cd /ws/cogutil/build && cmake .. && make -j2 && make -j2 install
+            cd /ws/cogutil/build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache .. && make -j2 && make -j2 install
             ldconfig
       - checkout
       - restore_cache:
@@ -41,7 +41,7 @@ jobs:
             - haskelldeps-{{checksum "/ws/atomspace/opencog/haskell/stack.yaml"}}-{{checksum "/ws/atomspace/opencog/haskell/opencog-atomspace.cabal"}}-{{ arch }}
       - run:
           name: CMake Configure
-          command: mkdir build && cd build && cmake ..
+          command: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
       - run:
           name: Build
           command: cd build && make -j4
@@ -54,9 +54,9 @@ jobs:
       - run:
           name: Install AtomSpace
           command: cd build && make -j4 install && ldconfig
-      - run:
-          name: Build examples
-          command: cd build && make -j4 examples
+#      - run:
+#          name: Build examples
+#          command: cd build && make -j4 examples
 #      - run:
 #          name: Print test log
 #          command: cat build/tests/Testing/Temporary/LastTest.log
@@ -110,7 +110,7 @@ jobs:
           command: git clone --depth 1 https://github.com/$CIRCLE_PROJECT_USERNAME/opencog .
       - run:
           name: CMake Configure
-          command: mkdir build && cd build && cmake ..
+          command: mkdir build && cd build && cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache ..
       - run:
           name: Build
           command: cd build && make -j2
